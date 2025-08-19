@@ -1,8 +1,8 @@
-import { describe, expect, test } from 'vitest';
-import { newCsvParser, parseCSV } from '../../src/csv/csv-parser';
+import { describe, expect, it } from 'vitest';
+import { newCsvParser, parseCSV } from '~/csv/csv-parser';
 
 describe('CSV Parser', () => {
-  test('should parse basic CSV data', () => {
+  it('should parse basic CSV data', () => {
     const csvText = 'name,age,city\nJohn,30,New York\nJane,25,Boston';
     const result = parseCSV(csvText, { headers: true });
 
@@ -13,7 +13,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should parse CSV without headers', () => {
+  it('should parse CSV without headers', () => {
     const csvText = 'John,30,New York\nJane,25,Boston';
     const result = parseCSV(csvText);
 
@@ -24,7 +24,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should handle quoted fields', () => {
+  it('should handle quoted fields', () => {
     const csvText =
       'name,description\n"John Doe","A person with, commas"\n"Jane Smith","Another person"';
     const result = parseCSV(csvText, { headers: true });
@@ -36,7 +36,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should handle escaped quotes', () => {
+  it('should handle escaped quotes', () => {
     const csvText =
       'name,quote\n"John","He said ""Hello"""\n"Jane","She said ""Hi"""';
     const result = parseCSV(csvText, { headers: true });
@@ -48,7 +48,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should handle different delimiters', () => {
+  it('should handle different delimiters', () => {
     const csvText = 'name;age;city\nJohn;30;New York\nJane;25;Boston';
     const result = parseCSV(csvText, { delimiter: ';', headers: true });
 
@@ -59,7 +59,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should skip empty lines when option is enabled', () => {
+  it('should skip empty lines when option is enabled', () => {
     const csvText = 'name,age\nJohn,30\n\nJane,25\n';
     const result = parseCSV(csvText, { headers: true, skipEmptyLines: true });
 
@@ -70,7 +70,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should trim fields when option is enabled', () => {
+  it('should trim fields when option is enabled', () => {
     const csvText =
       'name, age , city \n John , 30 , New York \n Jane , 25 , Boston ';
     const result = parseCSV(csvText, { headers: true, trimFields: true });
@@ -82,7 +82,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should handle newlines in quoted fields', () => {
+  it('should handle newlines in quoted fields', () => {
     const csvText =
       'name,description\n"John","Line 1\nLine 2"\n"Jane","Single line"';
     const result = parseCSV(csvText, { headers: true });
@@ -94,7 +94,7 @@ describe('CSV Parser', () => {
     ]);
   });
 
-  test('should create parser instance', () => {
+  it('should create parser instance', () => {
     const csvText = 'name,age\nJohn,30';
     const parser = newCsvParser(csvText, { headers: true });
     const result = parser.parse();
