@@ -1,10 +1,11 @@
 {
   "name": "sheafy",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A simple package for excel reader",
   "main": "./dist/index.mjs",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsdown",
