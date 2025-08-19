@@ -12,12 +12,19 @@
     "dev": "vite -c ./playground/vite.config.ts",
     "tc": "tsc --noEmit --skipLibCheck",
     "lint": "npx ultracite lint",
+    "test": "vitest --run",
     "lint:error": "pnpm exec biome check --diagnostic-level error",
     "lint:fix": "npx ultracite format",
     "bump": "bumpp --no-push",
     "prepublish": "pnpm tc && pnpm build"
   },
-  "keywords": [],
+  "sideEffects": false,
+  "keywords": [
+    "excel",
+    "sheet",
+    "parser",
+    "reader"
+  ],
   "author": "",
   "license": "MIT",
   "packageManager": "pnpm@10.14.0",

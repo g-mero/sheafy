@@ -2,4 +2,8 @@
 
 A simple package for reading Excel files.
 
-🚧 Work in progress...
+## Features
+
+- [x] read '.csv' files
+- [ ] read '.tsv' files
+- [x] read '.xlsx' files
