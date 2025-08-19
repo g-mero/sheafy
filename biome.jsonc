@@ -1,0 +1,13 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+	"extends": ["ultracite"],
+	"linter": {
+		"rules": {
+			"nursery": "off",
+			"suspicious": {
+				"noExplicitAny": "warn",
+				"noConsole": "warn"
+			}
+		}
+	}
+}

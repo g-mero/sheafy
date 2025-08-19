@@ -1,0 +1,48 @@
+{
+  "name": "sheafy",
+  "version": "0.0.0",
+  "description": "A simple package for excel reader",
+  "main": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "vite -c ./playground/vite.config.ts",
+    "tc": "tsc --noEmit --skipLibCheck",
+    "lint": "npx ultracite lint",
+    "lint:error": "pnpm exec biome check --diagnostic-level error",
+    "lint:fix": "npx ultracite format",
+    "bump": "bumpp --no-push",
+    "prepublish": "pnpm tc && pnpm build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.14.0",
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@rollup/plugin-strip": "^3.0.4",
+    "@solidjs/router": "^0.15.3",
+    "@types/node": "^24.3.0",
+    "bumpp": "^10.2.3",
+    "husky": "^9.1.7",
+    "solid-js": "^1.9.9",
+    "tsdown": "^0.14.1",
+    "ultracite": "5.2.3",
+    "unocss": "^66.4.2",
+    "vite": "^7.1.2",
+    "vite-plugin-solid": "^2.11.8",
+    "vite-plugin-solid-pages": "^0.3.5",
+    "vitest": "^3.2.4"
+  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  }
+}
