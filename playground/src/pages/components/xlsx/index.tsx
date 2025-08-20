@@ -22,7 +22,7 @@ export default function Index() {
               const sheets = await parser.getAllSheets();
               const data = await parser.readSheet(sheets[0]);
 
-              // Convert CellValue[][] to string[][]
+              // Convert XlsxCellValue[][] to string[][]
               const stringRows = data.map((row) =>
                 row.map((cell) => cell?.toString() ?? '')
               );

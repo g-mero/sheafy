@@ -1,5 +1,6 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { newCsvParser, parseCSV } from '~/csv/csv-parser';
+import { newCsvParser, parseCSV, parseCSVFromFile } from '~/csv/csv-parser';
 
 describe('CSV Parser', () => {
   it('should parse basic CSV data', () => {
@@ -101,5 +102,22 @@ describe('CSV Parser', () => {
 
     expect(result.headers).toEqual(['name', 'age']);
     expect(result.rows).toEqual([['John', '30']]);
+  });
+
+  it('should parse from file with auto encoding', async () => {
+    const csv = readFileSync('./test/assets/csv_data_ansi.csv');
+    const result = await parseCSVFromFile(
+      {
+        arrayBuffer() {
+          return Promise.resolve(csv);
+        },
+      } as unknown as File,
+      {
+        headers: true,
+        encoding: 'auto',
+      }
+    );
+
+    expect(result.headers).toEqual(['name', 'age', 'city', '职务']);
   });
 });

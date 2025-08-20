@@ -1,3 +1,5 @@
+import { smartDecodeText } from './smart-decode-text';
+
 export interface CsvParseOptions {
   delimiter?: string;
   quote?: string;
@@ -200,7 +202,7 @@ async function readFileWithEncoding(
 
   // Try to detect encoding if not specified or if utf-8 fails
   if (encoding === 'auto') {
-    return detectAndDecodeText(arrayBuffer);
+    return smartDecodeText(arrayBuffer);
   }
 
   try {
@@ -208,41 +210,8 @@ async function readFileWithEncoding(
     return decoder.decode(arrayBuffer);
   } catch {
     // If specified encoding fails, try common encodings for Chinese text
-    return detectAndDecodeText(arrayBuffer);
+    return smartDecodeText(arrayBuffer);
   }
-}
-
-/**
- * Attempt to detect encoding and decode text
- */
-function detectAndDecodeText(arrayBuffer: ArrayBuffer): string {
-  // Common encodings to try, especially for Chinese text
-  const encodingsToTry = [
-    'utf-8',
-    'gbk',
-    'gb2312',
-    'big5',
-    'windows-1252',
-    'iso-8859-1',
-  ];
-
-  for (const encoding of encodingsToTry) {
-    try {
-      const decoder = new TextDecoder(encoding, { fatal: true });
-      const text = decoder.decode(arrayBuffer);
-
-      // Check if the decoded text contains valid characters (not replacement characters)
-      if (!text.includes('\ufffd')) {
-        return text;
-      }
-    } catch {
-      // Try next encoding
-    }
-  }
-
-  // If all encodings fail, fall back to utf-8 with non-fatal decoding
-  const decoder = new TextDecoder('utf-8', { fatal: false });
-  return decoder.decode(arrayBuffer);
 }
 
 export function parseCSV(text: string, options?: CsvParseOptions): CsvData {

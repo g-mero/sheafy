@@ -9,7 +9,8 @@
         "noConsole": "warn"
       },
       "performance": {
-        "noBarrelFile": "off"
+        "noBarrelFile": "off",
+        "useTopLevelRegex": "off"
       }
     }
   }

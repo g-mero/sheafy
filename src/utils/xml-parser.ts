@@ -11,7 +11,7 @@ export class XmlParser {
   }
 
   find(selectors: string) {
-    return Array.from(this.dom.querySelectorAll(selectors));
+    return this.dom.querySelectorAll(selectors);
   }
 
   findFirst(selectors: string) {
