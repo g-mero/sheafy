@@ -104,7 +104,7 @@ describe('CSV Parser', () => {
     expect(result.rows).toEqual([['John', '30']]);
   });
 
-  it('should parse from file with auto encoding', async () => {
+  it('should parse csv from file with auto encoding', async () => {
     const csv = readFileSync('./test/assets/csv_data_ansi.csv');
     const result = await parseCSVFromFile(
       {
@@ -119,5 +119,22 @@ describe('CSV Parser', () => {
     );
 
     expect(result.headers).toEqual(['name', 'age', 'city', '职务']);
+  });
+
+  it('should parse tsv from file with auto encoding', async () => {
+    const csv = readFileSync('./test/assets/tsv_data.tsv');
+    const result = await parseCSVFromFile(
+      {
+        arrayBuffer() {
+          return Promise.resolve(csv);
+        },
+      } as unknown as File,
+      {
+        headers: true,
+        delimiter: '\t',
+      }
+    );
+
+    expect(result.headers).toEqual(['id', 'name', 'age', 'email']);
   });
 });
