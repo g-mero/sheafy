@@ -7,4 +7,3 @@ import "uno.css";
 const root = document.querySelector("#root");
 
 render(() => <App />, root as HTMLElement);
-

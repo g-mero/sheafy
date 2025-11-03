@@ -54,10 +54,10 @@ export function coordsToRef({
   col: number;
 }): string {
   if (row <= 0 || col <= 0) {
-    throw new Error('Row and column must be positive (1-based)');
+    throw new Error("Row and column must be positive (1-based)");
   }
 
-  let colLetters = '';
+  let colLetters = "";
   let n = col;
   while (n > 0) {
     const rem = (n - 1) % EXCEL_ALPHABET_LENGTH;

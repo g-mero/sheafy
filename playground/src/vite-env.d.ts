@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-declare module 'virtual:route-info' {
+declare module "virtual:route-info" {
   const routeInfo: {
     path: string;
     info: {
@@ -13,8 +13,8 @@ declare module 'virtual:route-info' {
   export default routeInfo;
 }
 
-declare module 'virtual:pages' {
-  import type { RouteDefinition } from '@solidjs/router';
+declare module "virtual:pages" {
+  import type { RouteDefinition } from "@solidjs/router";
   const routes: RouteDefinition[];
   export default routes;
 }

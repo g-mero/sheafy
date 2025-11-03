@@ -1,4 +1,4 @@
-import { XmlParser } from '~/utils';
+import { XmlParser } from "~/utils";
 
 export type SheetInfo = {
   name: string;
@@ -10,11 +10,11 @@ export function parseWorkbook(workbookXmlRaw: Uint8Array) {
   const parser = new XmlParser(workbookXmlRaw);
 
   const sheets: SheetInfo[] = [];
-  const sheetElements = parser.find('sheet');
+  const sheetElements = parser.find("sheet");
   for (const sheetEl of sheetElements) {
-    const name = sheetEl.getAttribute('name');
-    const sheetId = sheetEl.getAttribute('sheetId');
-    const rId = sheetEl.getAttribute('r:id');
+    const name = sheetEl.getAttribute("name");
+    const sheetId = sheetEl.getAttribute("sheetId");
+    const rId = sheetEl.getAttribute("r:id");
 
     if (name && sheetId && rId) {
       sheets.push({ name, sheetId, rId });
@@ -38,11 +38,11 @@ export function parseWorkbookRels(
 
   const rels: WorkbookRels = {};
 
-  for (const rel of parser.find('Relationship')) {
-    const id = rel.getAttribute('Id');
-    const target = rel.getAttribute('Target');
+  for (const rel of parser.find("Relationship")) {
+    const id = rel.getAttribute("Id");
+    const target = rel.getAttribute("Target");
     if (id && target) {
-      rels[id] = target.startsWith('worksheets/') ? `xl/${target}` : target;
+      rels[id] = target.startsWith("worksheets/") ? `xl/${target}` : target;
     }
   }
 

@@ -9,6 +9,6 @@ export const isNumber = (value: any): value is number => {
 export function isXlsxByMime(file: File): boolean {
   return (
     file.type ===
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   );
 }

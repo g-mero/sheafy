@@ -1,13 +1,13 @@
-import { createSignal } from 'solid-js';
-import { newXlsxParserFromFile } from '~/xlsx';
-import { FilePicker } from '~components/file-picker';
-import { Table } from '~components/table';
+import { createSignal } from "solid-js";
+import { newXlsxParserFromFile } from "~/xlsx";
+import { FilePicker } from "~components/file-picker";
+import { Table } from "~components/table";
 
-interface ParsedResult {
+type ParsedResult = {
   headers?: string[];
   rows: string[][];
   error?: string;
-}
+};
 
 export default function Index() {
   const [parsedData, setParsedData] = createSignal<ParsedResult | null>(null);
@@ -24,7 +24,7 @@ export default function Index() {
 
               // Convert XlsxCellValue[][] to string[][]
               const stringRows = data.map((row) =>
-                row.map((cell) => cell?.toString() ?? '')
+                row.map((cell) => cell?.toString() ?? "")
               );
 
               setParsedData({
@@ -33,7 +33,7 @@ export default function Index() {
               });
             } catch (error) {
               const errorMessage =
-                error instanceof Error ? error.message : 'Failed to read file';
+                error instanceof Error ? error.message : "Failed to read file";
               setParsedData({ rows: [], error: errorMessage });
             }
           }

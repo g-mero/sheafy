@@ -1,18 +1,18 @@
-import path from 'node:path';
-import UnoCSS from 'unocss/vite';
-import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
-import solidPagesPlugin from 'vite-plugin-solid-pages';
+import path from "node:path";
+import UnoCSS from "unocss/vite";
+import { defineConfig } from "vite";
+import solidPlugin from "vite-plugin-solid";
+import solidPagesPlugin from "vite-plugin-solid-pages";
 
 export default defineConfig({
-  root: './playground',
+  root: "./playground",
   resolve: {
     alias: {
-      '~/': `${path.resolve(__dirname, '../src')}/`,
-      '~components/': `${path.resolve(__dirname, './src/components')}/`,
+      "~/": `${path.resolve(__dirname, "../src")}/`,
+      "~components/": `${path.resolve(__dirname, "./src/components")}/`,
     },
   },
-  publicDir: './playground/public',
+  publicDir: "./playground/public",
   css: {
     modules: false,
   },
@@ -23,8 +23,8 @@ export default defineConfig({
     UnoCSS(),
     solidPlugin(),
     solidPagesPlugin({
-      dir: './playground/src/pages',
-      extensions: ['tsx'],
+      dir: "./playground/src/pages",
+      extensions: ["tsx"],
     }),
   ],
 });

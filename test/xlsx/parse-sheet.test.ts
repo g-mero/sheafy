@@ -1,9 +1,9 @@
-import { describe, expect, it } from 'vitest';
-import { parseSheet } from '~/xlsx/parse-sheet';
-import { sheetDataToMatrix } from '~/xlsx/sheet-data-to-matrix';
+import { describe, expect, it } from "vitest";
+import { parseSheet } from "~/xlsx/parse-sheet";
+import { sheetDataToMatrix } from "~/xlsx/sheet-data-to-matrix";
 
-describe('parseSheet', () => {
-  it('should parse sheet XML into cell reference object', () => {
+describe("parseSheet", () => {
+  it("should parse sheet XML into cell reference object", () => {
     const VALUE_A1 = 1;
     const VALUE_C1 = 3;
     const VALUE_E1 = 5;
@@ -58,7 +58,7 @@ describe('parseSheet', () => {
     expect(result.E2).toBeUndefined();
   });
 
-  it('should handle empty sheet XML', () => {
+  it("should handle empty sheet XML", () => {
     const emptySheetXml =
       new TextEncoder().encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
@@ -72,7 +72,7 @@ describe('parseSheet', () => {
     expect(result).toEqual({});
   });
 
-  it('should handle null or empty input', () => {
+  it("should handle null or empty input", () => {
     const result1 = parseSheet(new Uint8Array(), new Uint8Array());
     const result2 = parseSheet(null as unknown as Uint8Array, new Uint8Array());
 
@@ -80,7 +80,7 @@ describe('parseSheet', () => {
     expect(result2).toEqual({});
   });
 
-  it('should skip cells without reference attribute', () => {
+  it("should skip cells without reference attribute", () => {
     const sheetXml =
       new TextEncoder().encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
@@ -104,7 +104,7 @@ describe('parseSheet', () => {
     expect(Object.keys(result)).toHaveLength(2);
   });
 
-  it('should handle string cells with shared strings', () => {
+  it("should handle string cells with shared strings", () => {
     const sharedStringsXml =
       new TextEncoder().encode(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
@@ -126,14 +126,14 @@ describe('parseSheet', () => {
     const result = parseSheet(sheetXml, sharedStringsXml);
 
     expect(result).toEqual({
-      A1: 'Hello',
-      B1: 'World',
+      A1: "Hello",
+      B1: "World",
     });
   });
 });
 
-describe('parseSheet integration with sheetDataToMatrix', () => {
-  it('should convert parsed sheet data to matrix correctly', () => {
+describe("parseSheet integration with sheetDataToMatrix", () => {
+  it("should convert parsed sheet data to matrix correctly", () => {
     const VALUE_A1 = 1;
     const VALUE_C1 = 3;
     const VALUE_E1 = 5;
@@ -176,7 +176,7 @@ describe('parseSheet integration with sheetDataToMatrix', () => {
     expect(matrix[1]).toHaveLength(EXPECTED_COLS);
   });
 
-  it('should handle sparse data starting from non-A columns', () => {
+  it("should handle sparse data starting from non-A columns", () => {
     const TEST_VALUE_C1 = 100;
     const TEST_VALUE_D1 = 200;
     const EXPECTED_COLS = 4; // Columns A, B, C, D
@@ -201,7 +201,7 @@ describe('parseSheet integration with sheetDataToMatrix', () => {
     expect(matrix[0]).toHaveLength(EXPECTED_COLS);
   });
 
-  it('should handle empty sheet data conversion', () => {
+  it("should handle empty sheet data conversion", () => {
     const emptySheetData = parseSheet(new Uint8Array(), new Uint8Array());
     const matrix = sheetDataToMatrix(emptySheetData);
 

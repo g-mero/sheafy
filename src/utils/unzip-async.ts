@@ -1,4 +1,4 @@
-import { type Unzipped, unzip } from 'fflate';
+import { type Unzipped, unzip } from "fflate";
 
 export function asyncUnzip(data: Uint8Array) {
   return new Promise<Unzipped>((resolve, reject) => {

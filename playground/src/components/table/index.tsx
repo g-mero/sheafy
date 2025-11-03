@@ -1,10 +1,10 @@
-import { createMemo, For, Index } from 'solid-js';
+import { createMemo, For, Index } from "solid-js";
 
-interface TableProps {
+type TableProps = {
   data: string[][];
   headers?: string[];
   striped?: boolean;
-}
+};
 
 export function Table(props: TableProps) {
   // Determine if first row should be used as headers
@@ -28,13 +28,13 @@ export function Table(props: TableProps) {
 
   const getRowClass = (rowIndex: number) => {
     if (!props.striped) {
-      return 'bg-white';
+      return "bg-white";
     }
-    return rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+    return rowIndex % 2 === 0 ? "bg-white" : "bg-gray-50";
   };
 
   return (
-    <div class={'overflow-auto'}>
+    <div class={"overflow-auto"}>
       <table class="min-w-full bg-white border border-gray-200">
         {headers().length > 0 && (
           <thead class="bg-gray-50">

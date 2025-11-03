@@ -1,9 +1,9 @@
-import type { XlsxSheetData } from '~/types/xlsx';
-import { isNumber } from '~/utils';
-import { parseSheet } from './parse-sheet';
-import { parseWorkbook, parseWorkbookRels } from './parse-workbook';
-import { sheetDataToMatrix } from './sheet-data-to-matrix';
-import { unzipXlsx, type XlsxRawData } from './unzip-xlsx';
+import type { XlsxSheetData } from "~/types/xlsx";
+import { isNumber } from "~/utils";
+import { parseSheet } from "./parse-sheet";
+import { parseWorkbook, parseWorkbookRels } from "./parse-workbook";
+import { sheetDataToMatrix } from "./sheet-data-to-matrix";
+import { unzipXlsx, type XlsxRawData } from "./unzip-xlsx";
 
 export class XlsxParser {
   private isInitialized = false;

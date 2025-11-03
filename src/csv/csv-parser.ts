@@ -1,6 +1,6 @@
-import { smartDecodeText } from './smart-decode-text';
+import { smartDecodeText } from "./smart-decode-text";
 
-export interface CsvParseOptions {
+export type CsvParseOptions = {
   delimiter?: string;
   quote?: string;
   escape?: string;
@@ -9,12 +9,12 @@ export interface CsvParseOptions {
   trimFields?: boolean;
   headers?: boolean;
   encoding?: string;
-}
+};
 
-export interface CsvData {
+export type CsvData = {
   headers?: string[];
   rows: string[][];
-}
+};
 
 export class CsvParser {
   private readonly text: string;
@@ -23,14 +23,14 @@ export class CsvParser {
   constructor(text: string, options: CsvParseOptions = {}) {
     this.text = text;
     this.options = {
-      delimiter: options.delimiter ?? ',',
+      delimiter: options.delimiter ?? ",",
       quote: options.quote ?? '"',
       escape: options.escape ?? '"',
-      newline: options.newline ?? '\n',
+      newline: options.newline ?? "\n",
       skipEmptyLines: options.skipEmptyLines ?? true,
       trimFields: options.trimFields ?? false,
       headers: options.headers ?? false,
-      encoding: options.encoding ?? 'utf-8',
+      encoding: options.encoding ?? "utf-8",
     };
   }
 
@@ -48,7 +48,7 @@ export class CsvParser {
   private parseText(): string[][] {
     const rows: string[][] = [];
     let currentRow: string[] = [];
-    let currentField = '';
+    let currentField = "";
     let inQuotes = false;
     let i = 0;
 
@@ -68,13 +68,13 @@ export class CsvParser {
         i++;
       } else if (char === this.options.delimiter) {
         currentRow.push(this.processField(currentField));
-        currentField = '';
+        currentField = "";
         i++;
       } else if (this.isNewline(char)) {
         currentRow.push(this.processField(currentField));
         this.addRowIfNotEmpty(currentRow, rows);
         currentRow = [];
-        currentField = '';
+        currentField = "";
         i = this.skipNewlineSequence(i);
       } else {
         currentField += char;
@@ -97,9 +97,9 @@ export class CsvParser {
     const char = this.text[index];
     // Handle \r\n sequence
     if (
-      char === '\r' &&
+      char === "\r" &&
       index + 1 < this.text.length &&
-      this.text[index + 1] === '\n'
+      this.text[index + 1] === "\n"
     ) {
       return index + 2;
     }
@@ -120,7 +120,7 @@ export class CsvParser {
   }
 
   private isNewline(char: string): boolean {
-    return char === '\n' || char === '\r';
+    return char === "\n" || char === "\r";
   }
 
   private shouldSkipRow(row: string[]): boolean {
@@ -129,7 +129,7 @@ export class CsvParser {
     }
 
     // Skip if all fields are empty or whitespace
-    return row.every((field) => field.trim() === '');
+    return row.every((field) => field.trim() === "");
   }
 
   private handleQuotedCharacter(
@@ -138,7 +138,7 @@ export class CsvParser {
     currentField: string
   ) {
     const char = line[index];
-    const nextChar = index + 1 < line.length ? line[index + 1] : '';
+    const nextChar = index + 1 < line.length ? line[index + 1] : "";
 
     if (char === this.options.escape && nextChar === this.options.quote) {
       return {
@@ -196,12 +196,12 @@ export async function newCsvParserFromFile(
  */
 async function readFileWithEncoding(
   file: File,
-  encoding = 'utf-8'
+  encoding = "utf-8"
 ): Promise<string> {
   const arrayBuffer = await file.arrayBuffer();
 
   // Try to detect encoding if not specified or if utf-8 fails
-  if (encoding === 'auto') {
+  if (encoding === "auto") {
     return smartDecodeText(arrayBuffer);
   }
 

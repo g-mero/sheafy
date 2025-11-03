@@ -1,6 +1,6 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal } from "solid-js";
 
-export interface FilePickerProps {
+export type FilePickerProps = {
   value?: File | null;
   onChange?: (file: File | null) => void;
   accept?: string;
@@ -8,7 +8,7 @@ export interface FilePickerProps {
   disabled?: boolean;
   placeholder?: string;
   className?: string;
-}
+};
 
 export function FilePicker(props: FilePickerProps) {
   const [fileInputRef, setFileInputRef] = createSignal<HTMLInputElement>();
@@ -17,7 +17,7 @@ export function FilePicker(props: FilePickerProps) {
   createEffect(() => {
     const input = fileInputRef();
     if (input && !props.value) {
-      input.value = '';
+      input.value = "";
     }
   });
 
@@ -38,7 +38,7 @@ export function FilePicker(props: FilePickerProps) {
     event.stopPropagation();
     const input = fileInputRef();
     if (input) {
-      input.value = '';
+      input.value = "";
     }
     props.onChange?.(null);
   };
@@ -56,12 +56,12 @@ export function FilePicker(props: FilePickerProps) {
       />
 
       <button
-        class={`px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${props.className || ''}`}
+        class={`px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${props.className || ""}`}
         disabled={props.disabled}
         onClick={handleClick}
         type="button"
       >
-        {props.placeholder || 'Choose File'}
+        {props.placeholder || "Choose File"}
       </button>
 
       {props.value && (

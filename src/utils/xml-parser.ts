@@ -7,7 +7,7 @@ export class XmlParser {
   private parseXml(xmlRaw: Uint8Array): Document {
     const parser = new DOMParser();
     const xmlString = new TextDecoder().decode(xmlRaw);
-    return parser.parseFromString(xmlString, 'application/xml');
+    return parser.parseFromString(xmlString, "application/xml");
   }
 
   find(selectors: string) {

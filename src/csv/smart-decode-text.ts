@@ -4,13 +4,13 @@
 /** biome-ignore-all lint/style/noMagicNumbers: not necessary */
 function detectBOM(buffer: Uint8Array): string | null {
   if (buffer[0] === 0xef && buffer[1] === 0xbb && buffer[2] === 0xbf) {
-    return 'utf-8';
+    return "utf-8";
   }
   if (buffer[0] === 0xfe && buffer[1] === 0xff) {
-    return 'utf-16be';
+    return "utf-16be";
   }
   if (buffer[0] === 0xff && buffer[1] === 0xfe) {
-    return 'utf-16le';
+    return "utf-16le";
   }
   return null;
 }
@@ -22,7 +22,7 @@ function tryDecode(
 ): string | null {
   try {
     const text = new TextDecoder(encoding, { fatal }).decode(buffer);
-    return text.includes('\ufffd') ? null : text;
+    return text.includes("\ufffd") ? null : text;
   } catch {
     return null;
   }
@@ -44,13 +44,13 @@ export function smartDecodeText(arrayBuffer: ArrayBuffer): string {
   }
 
   // 2️⃣ Try UTF-8 first
-  const utf8Text = tryDecode(arrayBuffer, 'utf-8');
+  const utf8Text = tryDecode(arrayBuffer, "utf-8");
   if (utf8Text !== null) {
     return utf8Text;
   }
 
   // 3️⃣ Try common Chinese encodings
-  const chineseEncodings = ['gbk', 'gb2312', 'big5'];
+  const chineseEncodings = ["gbk", "gb2312", "big5"];
   for (const enc of chineseEncodings) {
     const text = tryDecode(arrayBuffer, enc);
     if (text !== null) {
@@ -59,7 +59,7 @@ export function smartDecodeText(arrayBuffer: ArrayBuffer): string {
   }
 
   // 4️⃣ Try other fallback encodings
-  const fallbackEncodings = ['windows-1252', 'iso-8859-1'];
+  const fallbackEncodings = ["windows-1252", "iso-8859-1"];
   for (const enc of fallbackEncodings) {
     const text = tryDecode(arrayBuffer, enc);
     if (text !== null) {
@@ -68,5 +68,5 @@ export function smartDecodeText(arrayBuffer: ArrayBuffer): string {
   }
 
   // 5️⃣ Last resort: decode as UTF-8 non-fatal
-  return new TextDecoder('utf-8', { fatal: false }).decode(arrayBuffer);
+  return new TextDecoder("utf-8", { fatal: false }).decode(arrayBuffer);
 }

@@ -1,13 +1,13 @@
-import { createSignal } from 'solid-js';
-import { parseCSVFromFile } from '~/csv/csv-parser';
-import { FilePicker } from '~components/file-picker';
-import { Table } from '~components/table';
+import { createSignal } from "solid-js";
+import { parseCSVFromFile } from "~/csv/csv-parser";
+import { FilePicker } from "~components/file-picker";
+import { Table } from "~components/table";
 
-interface ParsedResult {
+type ParsedResult = {
   headers?: string[];
   rows: string[][];
   error?: string;
-}
+};
 
 export default function Index() {
   const [parsedData, setParsedData] = createSignal<ParsedResult | null>(null);
@@ -19,11 +19,11 @@ export default function Index() {
           if (f) {
             try {
               // Use the new encoding-aware function
-              const result = await parseCSVFromFile(f, { encoding: 'auto' });
+              const result = await parseCSVFromFile(f, { encoding: "auto" });
               setParsedData(result);
             } catch (error) {
               const errorMessage =
-                error instanceof Error ? error.message : 'Failed to read file';
+                error instanceof Error ? error.message : "Failed to read file";
               setParsedData({ rows: [], error: errorMessage });
             }
           }
