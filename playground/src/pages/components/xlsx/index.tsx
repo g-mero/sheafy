@@ -18,9 +18,8 @@ export default function Index() {
         onChange={async (f) => {
           if (f) {
             try {
-              const parser = await newXlsxParserFromFile(f);
-              const sheets = await parser.getAllSheets();
-              const data = await parser.readSheet(sheets[0]);
+              const parser = newXlsxParserFromFile(f);
+              const data = await parser.readSheet(0);
 
               // Convert XlsxCellValue[][] to string[][]
               const stringRows = data.map((row) =>

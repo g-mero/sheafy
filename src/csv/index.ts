@@ -1,1 +1,1 @@
-export * from "./csv-parser";
+export { parseCSV, parseCSVFromFile } from "./csv-parser";

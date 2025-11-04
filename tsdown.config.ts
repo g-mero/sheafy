@@ -7,7 +7,7 @@ export default defineConfig([
     entry: "./src/index.ts",
     unbundle: true,
     platform: "browser",
-    format: ["esm"],
+    format: ["es"],
     clean: true,
     dts: true,
     plugins: [strip({ functions: ["console.*", "debugger"] })],
